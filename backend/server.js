@@ -1,25 +1,32 @@
-const express = require('express')
-const colors = require('colors')
-const dotenv = require('dotenv').config()
-const { errorHandler } = require('./middleware/errorMiddleware')
-const connectDB = require('./config/db')
-const PORT = process.env.PORT
+// app.js or server.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const db = require('./config/db'); // Import the Mongoose connection setup
+const cors = require('cors'); // Import the cors middleware
+const User = require('./models/userModel'); // Import the Mongoose model
 
-// Connect to database
-connectDB()
+const app = express();
+const port = 3010;
 
-const app = express()
+app.use(cors()); // Enable CORS for all routes
+app.use(bodyParser.json());
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+// Route to add data
+app.post('/api/users', async (req, res) => {
+  const { name, email, password } = req.body;
 
-app.get('/', (req, res) => {
-	res.status(200).send({ message: 'Welcome To The Support Desk API' })
-})
+  const newUser = new User({ name, email, password });
 
-// Routes
-app.use('/api/users', require('./routes/userRoutes'))
+  try {
+    const savedUser = await newUser.save();
+    console.log('User added to MongoDB:', savedUser);
+    res.status(201).json({ message: 'User added successfully', user: savedUser });
+  } catch (error) {
+    console.error('Error adding user to MongoDB:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
-app.use(errorHandler)
-
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});

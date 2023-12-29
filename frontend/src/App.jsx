@@ -6,11 +6,12 @@ import {
 	Outlet,
 	RouterProvider,
 } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import Navbar from './components/Navbar'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import NotFound from './pages/NotFound';
+import NotFound from './pages/NotFound'
 
 function App() {
 	const router = createBrowserRouter(
@@ -42,6 +43,7 @@ function App() {
 	return (
 		<>
 			<RouterProvider router={router} />
+			<ToastContainer />
 		</>
 	)
 }
@@ -53,6 +55,7 @@ export const Root = () => {
 				<Navbar className='relative z-20' />
 				<Outlet />
 			</div>
+			<ToastContainer />
 		</>
 	)
 }
