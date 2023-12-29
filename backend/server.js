@@ -1,5 +1,6 @@
 // app.js or server.js
 const express = require('express');
+const dotenv = require('dotenv').config()
 const bodyParser = require('body-parser');
 const db = require('./config/db'); // Import the Mongoose connection setup
 const cors = require('cors'); // Import the cors middleware
