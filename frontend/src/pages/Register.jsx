@@ -33,14 +33,16 @@ export default function Register() {
 				},
 				body: JSON.stringify({ name, email, password, password2 }),
 			})
+			const data = await response.json()
 
-			const result = await response.json()
-			console.log(result.message)
-			toast.error('Registration Successful')
-			navigate('/dashboard')
+			if(response.ok) {
+				toast.success('Registration Successful')
+				navigate('/dashboard')
+			} else {
+				toast.error(data.message)
+			}
 		} catch (error) {
 			toast.error('Error submitting form:', error)
-			console.error('Error submitting form:', error)
 		}
 	}
 
@@ -48,7 +50,7 @@ export default function Register() {
 		<>
 			<div className='bg-about-image bg-no-repeat bg-top blur-sm bg-cover lg:h-[99vh] md:h-[98vh] sm:h-[95vh] w-full'></div>
 			<div className='flex flex-col justify-center items-center absolute top-0 w-full h-screen mx-auto'>
-				<div className='p-12 glass-effect lg:w-[60%] w-[85%] mx-auto'>
+				<div className='p-12 glass-effect lg:w-[60%] w-[85%] m-auto'>
 					<section className='flex flex-col items-center pb-8'>
 						<h1 className='flex gap-4 text-3xl font-bold pb-4'>
 							<FaUser /> Register

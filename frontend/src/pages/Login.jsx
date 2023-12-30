@@ -32,13 +32,17 @@ export default function Login() {
 				body: JSON.stringify({ email, password }),
 			})
 
-			const result = await response.json()
-			console.log(result.message)
-			toast.info('Logged In')
+			const data = await response.json()
+
+			if(response.ok) {
+				toast.success('Registration Successful')
+				navigate('/dashboard')
+			} else {
+				toast.error(data.message)
+			}
 			navigate('/dashboard')
 		} catch (error) {
 			toast.error('Error submitting form:', error)
-			console.error('Error submitting form:', error)
 		}
 	}
 

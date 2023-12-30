@@ -1,47 +1,28 @@
-const express = require('express');
+const express = require('express')
+const colors = require('colors')
 const dotenv = require('dotenv').config()
-const bodyParser = require('body-parser');
-const db = require('./config/db');
-const cors = require('cors'); // Import the cors middleware
-const User = require('./models/userModel');
+const { errorHandler } = require('./middleware/errorMiddleware')
+const connectDB = require('./config/db')
+const cors = require('cors') // Import the cors middleware
 
-const app = express();
-const port = 3010;
+connectDB()
 
-app.use(cors()); // Enable CORS for all routes
-app.use(bodyParser.json());
+const app = express()
+const PORT = process.env.PORT || 5000
 
+app.use(cors())
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
+app.get('/', (req, res) => {
+	res.status(200).send({ message: 'Home page' })
+})
 // Route to add data
-app.post('/api/users', async (req, res) => {
-  const { name, email, password } = req.body;
+app.use('/api/users', require('./routes/userRoutes'))
 
-  const newUser = new User({ name, email, password });
+app.use(errorHandler)
 
-  try {
-    const savedUser = await newUser.save();
-    console.log('User added to MongoDB:', savedUser);
-    res.status(201).json({ message: 'User added successfully', user: savedUser });
-  } catch (error) {
-    console.error('Error adding user to MongoDB:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-app.post('/api/users/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  const loginUser = new User({ email, password });
-
-  try {
-    const savedUser = await loginUser.save();
-    console.log('User added to MongoDB:', savedUser);
-    res.status(201).json({ message: 'User added successfully', user: savedUser });
-  } catch (error) {
-    console.error('Error adding user to MongoDB:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+app.listen(PORT, () => {
+	console.log(`Server is running on http://localhost:${PORT}`)
+})

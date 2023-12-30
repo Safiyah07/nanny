@@ -7,6 +7,7 @@ import {
 	RouterProvider,
 	useLocation,
 } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify'
 import Navbar from './components/Navbar'
 import Landing from './pages/Landing'
@@ -49,7 +50,6 @@ function App() {
 	return (
 		<>
 			<RouterProvider router={router} />
-			<ToastContainer />
 		</>
 	)
 }
