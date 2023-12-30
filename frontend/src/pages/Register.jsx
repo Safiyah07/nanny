@@ -20,29 +20,30 @@ export default function Register() {
 	}
 
 	const onSubmit = async (e) => {
-    e.preventDefault();
+		e.preventDefault()
 
-    try {
-      const response = await fetch('http://localhost:3010/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, password, password2 }),
-      });
+		try {
+			const response = await fetch('http://localhost:3010/api/users', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ name, email, password, password2 }),
+			})
 
-      const result = await response.json();
-      console.log(result.message);
-    } catch (error) {
+			const result = await response.json()
+			console.log(result.message)
+		} catch (error) {
 			toast.error('Error submitting form:', error)
-      console.error('Error submitting form:', error);
-    }
-  };
+			console.error('Error submitting form:', error)
+		}
+	}
 
 	return (
 		<>
-			<div className='flex flex-col justify-center items-center h-screen bg-slate-300'>
-				<div className='p-12 bg-slate-100 w-1/2 m-auto'>
+			<div className='bg-about-image bg-no-repeat bg-top blur-sm bg-cover lg:h-[99vh] md:h-[98vh] sm:h-[95vh] w-full'></div>
+			<div className='flex flex-col justify-center items-center absolute top-0 lg:w-full w-[85%] h-screen'>
+				<div className='p-12 glass-effect lg:w-[60%] w-[85%] m-auto'>
 					<section className='flex flex-col items-center pb-8'>
 						<h1 className='flex gap-4 text-3xl font-bold pb-4'>
 							<FaUser /> Register
@@ -101,7 +102,9 @@ export default function Register() {
 								/>
 							</div>
 							<div className='bg-black border-black border-2'>
-								<button className='text-white m-auto w-full h-10   hover:scale-110'>Submit</button>
+								<button className='text-white m-auto w-full h-10   hover:scale-110'>
+									Submit
+								</button>
 							</div>
 						</form>
 					</section>

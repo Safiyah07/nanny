@@ -18,7 +18,7 @@ function Main() {
 							to='/register'
 							className='w-1/3 p-3 duration-100 delay-75 bg-grey hover:scale-105'
 						>
-							Register Now
+							Register
 						</Link>
 					</div>
 				</div>

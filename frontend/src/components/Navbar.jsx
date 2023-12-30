@@ -72,9 +72,7 @@ function Navbar() {
 						}
 					>
 						<h1
-							className={`${
-								isLoginPage || (isRegisterPage ? 'text-black' : '')
-							} lg:text-3xl md:text-2xl sm:text-2xl font-bold lg:ml-[4rem] md:ml-10 sm:ml-4 cursor-pointer`}
+							className='lg:text-3xl md:text-2xl sm:text-2xl font-bold lg:ml-[4rem] md:ml-10 sm:ml-4 cursor-pointer'
 						>
 							<Link to='/'>Nanny</Link>
 						</h1>
@@ -83,10 +81,10 @@ function Navbar() {
 							<ul className='flex gap-10 font-extrabold text-lg capitalize lg:mr-[4rem] md:hidden sm:hidden'>
 								{isLoginPage || isRegisterPage ? (
 									<>
-										<li className='text-black duration-100 delay-75 font-semibold hover:scale-110'>
+										<li className='duration-100 delay-75 font-semibold hover:scale-110'>
 											<Link to='/login'>login</Link>
 										</li>
-										<li className='text-black duration-100 delay-75 font-semibold hover:scale-110'>
+										<li className='duration-100 delay-75 font-semibold hover:scale-110'>
 											<Link to='/register'>register</Link>
 										</li>
 									</>
@@ -147,6 +145,12 @@ function Navbar() {
 									</li>
 								</a>
 							))}
+							<li className='py-4 capitalize border md:px-10 sm:px-4 border-b-gray-100 border-t-gray-100'>
+								<Link to='/login'>Login</Link>
+							</li>
+							<li className='py-4 capitalize border md:px-10 sm:px-4 border-b-gray-100 border-t-gray-100'>
+								<Link to='/register'>Register</Link>
+							</li>
 						</ul>
 					</motion.div>
 				</div>

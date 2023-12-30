@@ -12,8 +12,8 @@ export default {
 			},
       backgroundImage: {
         'hero-image': "url('/src/assets/nanny-hero2.jpg')",
-        'about-image': "url('/src/assets/hero1.webp')",
-        'services-image': "url('/src/assets/services-image.jpg')",
+        'about-image': "url('/src/assets/nanny1.webp')",
+        'services-image': "url('/src/assets/nanny2.jpeg')",
         'services-image2': "url('/src/assets/services-image2.jpg')",
         'services-image3': "url('/src/assets/services-image3.jpg')",
         'news-image': "url('/src/assets/globe-image.jpg')",
