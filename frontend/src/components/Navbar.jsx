@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { IoMenu, IoClose } from 'react-icons/io5'
 import { motion } from 'framer-motion'
 
@@ -22,6 +22,11 @@ function Navbar() {
 			title: 'contact',
 		},
 	]
+
+	const location = useLocation();
+
+  const isLoginPage = location.pathname === '/login';
+  const isRegisterPage = location.pathname === '/register';
 
 	const [showMenu, setShowMenu] = useState(true)
 
@@ -67,25 +72,38 @@ function Navbar() {
 						}
 					>
 						<h1 className='lg:text-3xl md:text-2xl sm:text-2xl font-bold lg:ml-[4rem] md:ml-10 sm:ml-4 cursor-pointer'>
-							<a href='#main'>Nanny</a>
+							<Link to='/'>Nanny</Link>
 						</h1>
 
 						<div className=''>
 							<ul className='flex gap-10 text-lg capitalize lg:mr-[4rem] md:hidden sm:hidden'>
-								{menuItem.map((menu) => (
-									<li
-										key={menu.id}
-										className='duration-100 delay-75 hover:text-grey hover:font-semibold'
-									>
-										<a href={`#${menu.title}`}>{menu.title}</a>
-									</li>
-								))}
-								<li className='duration-100 delay-75 hover:text-grey hover:font-semibold'>
-									<Link to='/login'>login</Link>
-								</li>
-								<li className='duration-100 delay-75 hover:text-grey hover:font-semibold'>
-									<Link to='/register'>register</Link>
-								</li>
+								{isLoginPage || isRegisterPage ? (
+									<>
+										<li className='duration-100 delay-75 hover:scale-105 hover:font-semibold'>
+											<Link to='/login'>login</Link>
+										</li>
+										<li className='duration-100 delay-75 hover:scale-105 hover:font-semibold'>
+											<Link to='/register'>register</Link>
+										</li>
+									</>
+								) : (
+									<>
+										{menuItem.map((menu) => (
+											<li
+												key={menu.id}
+												className='duration-100 delay-75 hover:text-grey hover:font-semibold'
+											>
+												<a href={`#${menu.title}`}>{menu.title}</a>
+											</li>
+										))}
+										<li className='duration-100 delay-75 hover:text-grey hover:font-semibold'>
+											<Link to='/login'>login</Link>
+										</li>
+										<li className='duration-100 delay-75 hover:text-grey hover:font-semibold'>
+											<Link to='/register'>register</Link>
+										</li>
+									</>
+								)}
 							</ul>
 
 							<div

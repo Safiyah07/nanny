@@ -34,6 +34,7 @@ export default function Register() {
       const result = await response.json();
       console.log(result.message);
     } catch (error) {
+			toast.error('Error submitting form:', error)
       console.error('Error submitting form:', error);
     }
   };
