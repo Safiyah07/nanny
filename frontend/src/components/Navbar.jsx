@@ -53,6 +53,7 @@ function Navbar() {
 
 	return (
 		<>
+			{/* Desktop Navbar */}
 			<div className='fixed top-0 left-0 right-0 z-10'>
 				<div
 					className={
@@ -71,9 +72,7 @@ function Navbar() {
 									} flex justify-between items-center py-4 tracking-wider`
 						}
 					>
-						<h1
-							className='lg:text-3xl md:text-2xl sm:text-2xl font-bold lg:ml-[4rem] md:ml-10 sm:ml-4 cursor-pointer'
-						>
+						<h1 className='lg:text-3xl md:text-2xl sm:text-2xl font-bold lg:ml-[4rem] md:ml-10 sm:ml-4 cursor-pointer'>
 							<Link to='/'>Nanny</Link>
 						</h1>
 
@@ -135,22 +134,38 @@ function Navbar() {
 										} lg:hidden`
 							}
 						>
-							{menuItem.map((menu) => (
-								<a
-									key={menu.id}
-									href={`#${menu.title}`}
-								>
+							{isLoginPage || isRegisterPage ? (
+								<>
 									<li className='py-4 capitalize border md:px-10 sm:px-4 border-b-gray-100 border-t-gray-100'>
-										{menu.title}
+										<Link to='/'>Home</Link>
 									</li>
-								</a>
-							))}
-							<li className='py-4 capitalize border md:px-10 sm:px-4 border-b-gray-100 border-t-gray-100'>
-								<Link to='/login'>Login</Link>
-							</li>
-							<li className='py-4 capitalize border md:px-10 sm:px-4 border-b-gray-100 border-t-gray-100'>
-								<Link to='/register'>Register</Link>
-							</li>
+									<li className='py-4 capitalize border md:px-10 sm:px-4 border-b-gray-100 border-t-gray-100'>
+										<Link to='/login'>Login</Link>
+									</li>
+									<li className='py-4 capitalize border md:px-10 sm:px-4 border-b-gray-100 border-t-gray-100'>
+										<Link to='/register'>Register</Link>
+									</li>
+								</>
+							) : (
+								<>
+									{menuItem.map((menu) => (
+										<a
+											key={menu.id}
+											href={`#${menu.title}`}
+										>
+											<li className='py-4 capitalize border md:px-10 sm:px-4 border-b-gray-100 border-t-gray-100'>
+												{menu.title}
+											</li>
+										</a>
+									))}
+									<li className='py-4 capitalize border md:px-10 sm:px-4 border-b-gray-100 border-t-gray-100'>
+										<Link to='/login'>Login</Link>
+									</li>
+									<li className='py-4 capitalize border md:px-10 sm:px-4 border-b-gray-100 border-t-gray-100'>
+										<Link to='/register'>Register</Link>
+									</li>
+								</>
+							)}
 						</ul>
 					</motion.div>
 				</div>

@@ -30,10 +30,10 @@ app.post('/api/users', async (req, res) => {
 app.post('/api/users/login', async (req, res) => {
   const { email, password } = req.body;
 
-  const newUser = new User({ email, password });
+  const loginUser = new User({ email, password });
 
   try {
-    const savedUser = await newUser.save();
+    const savedUser = await loginUser.save();
     console.log('User added to MongoDB:', savedUser);
     res.status(201).json({ message: 'User added successfully', user: savedUser });
   } catch (error) {

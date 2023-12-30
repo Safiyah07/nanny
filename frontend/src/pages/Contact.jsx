@@ -33,6 +33,7 @@ function Contact() {
 					<div className='flex flex-col pt-7'>
 						<h1>Useful Links</h1>
 						<br className='sm:hidden' />
+						<a href='#home'>Sign Up as Nanny</a>
 						<a href='#home'>Top</a>
 						<a href='#services'>Services</a>
 						<a href='#about'>About</a>

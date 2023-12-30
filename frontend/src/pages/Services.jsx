@@ -82,21 +82,6 @@ function Services() {
 						</div>
 					</div>
 				</div>
-				{/* <div className=''>
-						<img
-							src={servicesImage2}
-							alt='Second Service Img'
-              className='lg:h-[15vw]'
-						/>
-					</div> */}
-
-				{/* <div className=''>
-						<img
-							src={servicesImage3}
-							alt='Third Service Img'
-              className='lg:h-[15vw]'
-						/>
-					</div> */}
 			</div>
 		</>
 	)

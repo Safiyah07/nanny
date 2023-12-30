@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify'
 import { FaUser } from 'react-icons/fa'
 
@@ -11,6 +12,8 @@ export default function Register() {
 	})
 
 	const { name, email, password, password2 } = formData
+
+	const navigate = useNavigate()
 
 	const onChange = (e) => {
 		setFormData((prevState) => ({
@@ -33,6 +36,8 @@ export default function Register() {
 
 			const result = await response.json()
 			console.log(result.message)
+			toast.error('Registration Successful')
+			navigate('/dashboard')
 		} catch (error) {
 			toast.error('Error submitting form:', error)
 			console.error('Error submitting form:', error)
@@ -42,8 +47,8 @@ export default function Register() {
 	return (
 		<>
 			<div className='bg-about-image bg-no-repeat bg-top blur-sm bg-cover lg:h-[99vh] md:h-[98vh] sm:h-[95vh] w-full'></div>
-			<div className='flex flex-col justify-center items-center absolute top-0 lg:w-full w-[85%] h-screen'>
-				<div className='p-12 glass-effect lg:w-[60%] w-[85%] m-auto'>
+			<div className='flex flex-col justify-center items-center absolute top-0 w-full h-screen mx-auto'>
+				<div className='p-12 glass-effect lg:w-[60%] w-[85%] mx-auto'>
 					<section className='flex flex-col items-center pb-8'>
 						<h1 className='flex gap-4 text-3xl font-bold pb-4'>
 							<FaUser /> Register
