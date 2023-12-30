@@ -23,10 +23,10 @@ function Navbar() {
 		},
 	]
 
-	const location = useLocation();
+	const location = useLocation()
 
-  const isLoginPage = location.pathname === '/login';
-  const isRegisterPage = location.pathname === '/register';
+	const isLoginPage = location.pathname === '/login'
+	const isRegisterPage = location.pathname === '/register'
 
 	const [showMenu, setShowMenu] = useState(true)
 
@@ -71,18 +71,22 @@ function Navbar() {
 									} flex justify-between items-center py-4 tracking-wider`
 						}
 					>
-						<h1 className='lg:text-3xl md:text-2xl sm:text-2xl font-bold lg:ml-[4rem] md:ml-10 sm:ml-4 cursor-pointer'>
+						<h1
+							className={`${
+								isLoginPage || (isRegisterPage ? 'text-black' : '')
+							} lg:text-3xl md:text-2xl sm:text-2xl font-bold lg:ml-[4rem] md:ml-10 sm:ml-4 cursor-pointer`}
+						>
 							<Link to='/'>Nanny</Link>
 						</h1>
 
 						<div className=''>
-							<ul className='flex gap-10 text-lg capitalize lg:mr-[4rem] md:hidden sm:hidden'>
+							<ul className='flex gap-10 font-extrabold text-lg capitalize lg:mr-[4rem] md:hidden sm:hidden'>
 								{isLoginPage || isRegisterPage ? (
 									<>
-										<li className='duration-100 delay-75 hover:scale-105 hover:font-semibold'>
+										<li className='text-black duration-100 delay-75 font-semibold hover:scale-110'>
 											<Link to='/login'>login</Link>
 										</li>
-										<li className='duration-100 delay-75 hover:scale-105 hover:font-semibold'>
+										<li className='text-black duration-100 delay-75 font-semibold hover:scale-110'>
 											<Link to='/register'>register</Link>
 										</li>
 									</>
@@ -91,15 +95,15 @@ function Navbar() {
 										{menuItem.map((menu) => (
 											<li
 												key={menu.id}
-												className='duration-100 delay-75 hover:text-grey hover:font-semibold'
+												className='duration-100 delay-75 hover:scale-110 hover:font-semibold'
 											>
 												<a href={`#${menu.title}`}>{menu.title}</a>
 											</li>
 										))}
-										<li className='duration-100 delay-75 hover:text-grey hover:font-semibold'>
+										<li className='duration-100 delay-75 hover:scale-110 hover:font-semibold'>
 											<Link to='/login'>login</Link>
 										</li>
-										<li className='duration-100 delay-75 hover:text-grey hover:font-semibold'>
+										<li className='duration-100 delay-75 hover:scale-110 hover:font-semibold'>
 											<Link to='/register'>register</Link>
 										</li>
 									</>

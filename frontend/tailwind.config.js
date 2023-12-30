@@ -11,8 +11,8 @@ export default {
 				'off-white': '#f7fdff',
 			},
       backgroundImage: {
-        'hero-image': "url('/src/assets/hero-image.jpg')",
-        'about-image': "url('/src/assets/about-image.jpg')",
+        'hero-image': "url('/src/assets/nanny-hero2.jpg')",
+        'about-image': "url('/src/assets/hero1.webp')",
         'services-image': "url('/src/assets/services-image.jpg')",
         'services-image2': "url('/src/assets/services-image2.jpg')",
         'services-image3': "url('/src/assets/services-image3.jpg')",

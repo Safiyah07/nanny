@@ -1,4 +1,4 @@
-import aboutImage from '../assets/about-image.jpg'
+import aboutImage from '../assets/nanny1.webp'
 
 function About() {
 	return (
@@ -8,32 +8,25 @@ function About() {
 				id='about'
 			>
 				<div className='text-center font-bold'>
-					<h1 className='text-xl tracking-wider'>About company</h1>
-					<p className='text-grey'>Some History</p>
+					<h1 className='text-xl tracking-wider'>About Nanny</h1>
+					<p className='text-grey'>Why Trust Us?</p>
 				</div>
 				<br />
 
 				<div className='flex gap-10 md:flex-wrap sm:flex-wrap'>
 					<div className='lg:w-2/3 lg:ml-[6.2rem] md:text-center sm:text-center'>
-						<p>
-							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint
-							saepe eveniet atque aperiam minus aliquam ipsam omnis excepturi
-							dolore autem magnam unde qui nobis, nam ullam quaerat. Voluptate,
-							error voluptatum.
+					<p>
+							We believe in creating lasting
+							relationships between families and nannies. Discover the joy
+							of a well-matched nanny with Nanny. Your family&apos;s happiness starts here.
 						</p>
 						<br />
 						<p>
-							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint
-							saepe eveniet atque aperiam minus aliquam ipsam omnis excepturi
-							dolore autem magnam unde qui nobis, nam ullam quaerat. Voluptate,
-							error voluptatum.
+							At Nanny, we understand that finding the right caregiver for your children is a crucial decision. Our mission is to make the process of hiring a nanny seamless, stress-free, and tailored to your family&apos;s unique needs.</p>
+							<br />
+							<p> With years of experience in the childcare industry, we take pride in connecting families with highly qualified and caring nannies who share our commitment to providing a nurturing and safe environment for your little ones.
 						</p>
-						<br />
-						<a href='#news'>
-							<button className='bg-grey text-off-white uppercase w-1/3 p-3 hover:scale-105 delay-75 duration-100'>
-								More
-							</button>
-						</a>
+						
 					</div>
 
 					<div className=''>

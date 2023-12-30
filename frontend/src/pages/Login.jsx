@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { FaSignInAlt } from 'react-icons/fa'
-import { useSelector, useDispatch } from 'react-redux'
-import { login } from '../features/auth/authSlice'
+import { toast } from 'react-toastify'
 
 export default function Login() {
 	const [formData, setFormData] = useState({
@@ -11,12 +10,6 @@ export default function Login() {
 
 	const { email, password } = formData
 
-	const dispatch = useDispatch()
-
-	const { user, isLoading, isSuccess, message } = useSelector(
-		(state) => state.auth
-	)
-
 	const onChange = (e) => {
 		setFormData((prevState) => ({
 			...prevState,
@@ -24,26 +17,35 @@ export default function Login() {
 		}))
 	}
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault()
 
-		const userData = {
-			email,
-			password,
-		}
+		try {
+      const response = await fetch('http://localhost:3010/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-		dispatch(login(userData))
+      const result = await response.json();
+      console.log(result.message);
+    } catch (error) {
+			toast.error('Error submitting form:', error)
+      console.error('Error submitting form:', error);
+    }
 	}
 
 	return (
 		<>
-			<div className='flex flex-col justify-center items-center h-screen bg-grey'>
-				<div className='bg-white p-12 w-1/2 m-auto'>
-					<section className='flex flex-col items-center text-2xl pb-8'>
-						<h1 className='flex gap-4 pb-4'>
+			<div className='flex flex-col justify-center items-center h-screen bg-slate-300'>
+				<div className='p-12 bg-slate-100 w-1/2 m-auto'>
+					<section className='flex flex-col items-center pb-8'>
+						<h1 className='flex gap-4 text-3xl font-bold pb-4'>
 							<FaSignInAlt /> Welcome Back!
 						</h1>
-						<p className=''>Please log into your account </p>
+						<p className='text-2xl'>Please log into your account </p>
 					</section>
 
 					<section className='form'>
@@ -51,7 +53,7 @@ export default function Login() {
 							<div className='form-group'>
 								<input
 									type='email'
-									className='border-2 w-full'
+									className='border-2 w-full h-10 p-2 mb-2'
 									id='email'
 									name='email'
 									value={email}
@@ -63,7 +65,7 @@ export default function Login() {
 							<div className='form-group'>
 								<input
 									type='password'
-									className='form-control'
+									className='border-2 w-full h-10 p-2 mb-6'
 									id='password'
 									name='password'
 									value={password}
@@ -72,8 +74,8 @@ export default function Login() {
 									required
 								/>
 							</div>
-							<div className='form-group'>
-								<button className='btn btn-block'>Submit</button>
+							<div className='bg-black border-black border-2'>
+								<button className='text-white m-auto w-full h-10   hover:scale-110'>Submit</button>
 							</div>
 						</form>
 					</section>
