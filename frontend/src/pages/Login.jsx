@@ -22,9 +22,10 @@ export default function Login() {
 
 	const onSubmit = async (e) => {
 		e.preventDefault()
+		const loginURL = 'http://localhost:3010/api/users'
 
 		try {
-			const response = await fetch('http://localhost:3010/api/users/login', {
+			const response = await fetch(`${loginURL}/login`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -33,9 +34,10 @@ export default function Login() {
 			})
 
 			const data = await response.json()
+			console.log(data)
 
 			if(response.ok) {
-				toast.success('Registration Successful')
+				toast.success('Login Successful')
 				navigate('/dashboard')
 			} else {
 				toast.error(data.message)
