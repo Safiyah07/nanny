@@ -1,6 +1,6 @@
-import nannyImg1 from '../assets/nanny-hero.jpg'
-import nannyImg2 from '../assets/nanny2.jpeg'
-import nannyImg3 from '../assets/nanny3.jpeg'
+import nannyImg1 from '../../assets/nanny-hero.jpg'
+import nannyImg2 from '../../assets/nanny2.jpeg'
+import nannyImg3 from '../../assets/nanny3.jpeg'
 
 function Services() {
 	return (

@@ -1,4 +1,4 @@
-import aboutImage from '../assets/nanny1.webp'
+import aboutImage from '../../assets/nanny1.webp'
 
 function About() {
 	return (

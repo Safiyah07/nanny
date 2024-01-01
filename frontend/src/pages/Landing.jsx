@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
-import Main from './Main'
-import About from './About'
-import Services from './Services'
-import Contact from './Contact'
+import Main from '../components/landingPage/Main'
+import About from '../components/landingPage/About'
+import Services from '../components/landingPage/Services'
+import Contact from '../components/landingPage/Contact'
 
 function Landing() {
 	return (
