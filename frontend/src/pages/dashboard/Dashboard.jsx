@@ -1,15 +1,13 @@
-import { Navbar } from '../../components/dashboard/Navbar'
-import Sidebar from '../../components/dashboard/Sidebar'
+import Map from '../../components/dashboard/Map'
 
-export default function Dashboard() {
+function Dashboard() {
 	return (
 		<>
-			<div className='w-fit flex'>
-				<Sidebar />
-				<div>
-					<Navbar />
-				</div>
+			<div className='w-full'>dashboard
+				<Map />
 			</div>
 		</>
 	)
 }
+
+export default Dashboard

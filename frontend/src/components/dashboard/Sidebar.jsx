@@ -1,38 +1,45 @@
 import { useLocation, Link } from 'react-router-dom'
 import {
-	TbLayout2,
-	TbPhoneCheck,
-	TbSettings,
-} from 'react-icons/tb'
-import { VscLayoutMenubar } from 'react-icons/vsc'
-import { IoIosPeople } from 'react-icons/io'
-import { IoPersonCircleSharp } from 'react-icons/io5'
+	FaGripVertical,
+	FaUserCheck,
+	FaCheckCircle,
+	FaUserSlash,
+	FaEyeSlash,
+	FaCog,
+	FaSignOutAlt,
+} from 'react-icons/fa'
 
 export const DashboardSidebar = () => {
 	const navbarItems = [
 		{
 			id: 1,
-			title: 'employed nannies',
-			icon: <TbLayout2 />,
-			link: '',
+			title: 'dashboard',
+			icon: <FaGripVertical />,
+			link: 'dashboard',
 		},
 		{
 			id: 2,
-			title: 'completed servies',
-			icon: <VscLayoutMenubar />,
-			link: 'menu',
+			title: 'employed nannies',
+			icon: <FaUserCheck />,
+			link: 'employed-nannies',
 		},
 		{
 			id: 3,
-			title: 'cancelled services',
-			icon: <TbPhoneCheck />,
-			link: 'orders',
+			title: 'completed services',
+			icon: <FaCheckCircle />,
+			link: 'completed-services',
 		},
 		{
 			id: 4,
+			title: 'cancelled services',
+			icon: <FaUserSlash />,
+			link: 'cancelled-services',
+		},
+		{
+			id: 5,
 			title: 'report nanny',
-			icon: <IoIosPeople />,
-			link: 'staff',
+			icon: <FaEyeSlash />,
+			link: 'report-nanny',
 		},
 	]
 
@@ -40,12 +47,12 @@ export const DashboardSidebar = () => {
 		{
 			id: 1,
 			title: 'settings',
-			icon: <TbSettings />,
+			icon: <FaCog />,
 		},
 		{
 			id: 2,
 			title: 'log-out',
-			icon: <IoPersonCircleSharp />,
+			icon: <FaSignOutAlt />,
 		},
 	]
 
@@ -64,15 +71,15 @@ export const DashboardSidebar = () => {
 				<div className='relative flex flex-col justify-between w-fit h-full sm:hidden md:hidden'>
 					<div>
 						<Link
-							to='/dasboard'
+							to='/dashboard'
 							className='flex items-center p-4'
 						>
-							<h1 className='text-xl font-bold text-center uppercase'>Nanny</h1>
+							<h1 className='text-grey text-xl font-bold text-center uppercase'>
+								Nanny
+							</h1>
 						</Link>
 
 						<ul className='p-4 rounded-box'>
-							<span className='pb-1 text-sm text-slate-400'>Main Menu</span>
-
 							{navbarItems.map((Item) => (
 								<li
 									key={Item.id}
@@ -81,9 +88,8 @@ export const DashboardSidebar = () => {
 									<Link
 										to={`/${Item.link}`}
 										className={`${
-											pathMatchRoute(`/${Item.link}`) &&
-											'text-white bg-light-purple'
-										} flex items-center mb-1 py-2 px-4 w-full rounded-lg hover:bg-light-purple hover:text-white`}
+											pathMatchRoute(`/${Item.link}`) && 'text-white bg-grey'
+										} flex items-center mb-1 py-2 px-4 w-full text-grey hover:bg-grey hover:text-white`}
 									>
 										<span className='mr-2'>{Item.icon}</span>
 										{Item.title}
@@ -103,9 +109,8 @@ export const DashboardSidebar = () => {
 									<Link
 										to={`/${Item.title}`}
 										className={`${
-											pathMatchRoute(`/${Item.title}`) &&
-											'text-white bg-light-purple'
-										} flex items-center mb-1 py-2 px-4 w-full rounded-lg hover:bg-light-purple hover:text-white`}
+											pathMatchRoute(`/${Item.title}`) && 'text-white bg-grey'
+										} flex items-center mb-1 py-2 px-4 w-full text-grey hover:bg-grey hover:text-white`}
 									>
 										<span className='mr-2'>{Item.icon}</span>
 										{Item.title}

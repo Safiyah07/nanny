@@ -13,7 +13,7 @@ import Navbar from './components/Navbar'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import Dashboard from './pages/dashboard/Dashboard'
+import DashboardIndex from './pages/dashboard'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
 				/>
 				<Route
 					path='/dashboard'
-					element={<Dashboard />}
+					element={<DashboardIndex />}
 				/>
 				<Route
 					path='/*'
