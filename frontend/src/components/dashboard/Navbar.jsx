@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fa'
 import { FaXmark } from 'react-icons/fa6'
 
-export const Navbar = () => {
+function Navbar() {
 	const navbarItems = [
 		{
 			id: 1,
@@ -151,3 +151,5 @@ export const Navbar = () => {
 		</>
 	)
 }
+
+export default Navbar

@@ -1,19 +1,21 @@
 import './index.css'
+import PropTypes from 'prop-types'
 import {
 	createBrowserRouter,
 	createRoutesFromElements,
 	Route,
 	Outlet,
 	RouterProvider,
-	useLocation,
 } from 'react-router-dom'
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 import Navbar from './components/Navbar'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import DashboardIndex from './pages/dashboard'
+import DashboardSidebar from './components/dashboard/Sidebar'
+import DashboardNavbar from './components/dashboard/Navbar'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -25,19 +27,35 @@ function App() {
 			>
 				<Route
 					index
-					element={<Landing />}
+					element={
+						<WithLandingPageNavbar>
+							<Landing />
+						</WithLandingPageNavbar>
+					}
 				/>
 				<Route
 					path='/login'
-					element={<Login />}
+					element={
+						<WithLandingPageNavbar>
+							<Login />
+						</WithLandingPageNavbar>
+					}
 				/>
 				<Route
 					path='/register'
-					element={<Register />}
+					element={
+						<WithLandingPageNavbar>
+							<Register />
+						</WithLandingPageNavbar>
+					}
 				/>
 				<Route
 					path='/dashboard'
-					element={<DashboardIndex />}
+					element={
+						<WithDashboardNavbar>
+							<DashboardIndex />
+						</WithDashboardNavbar>
+					}
 				/>
 				<Route
 					path='/*'
@@ -54,24 +72,39 @@ function App() {
 	)
 }
 
-export const Root = () => {
-	const location = useLocation()
-
-	const showNavbar = !location.pathname.startsWith('/dashboard');
-
+// Landing page navbar
+const WithLandingPageNavbar = ({ children }) => {
 	return (
-		<>
-			<div className=''>
-				{showNavbar && (
-        <div className=''>
-          <Navbar className='relative z-20' />
-        </div>
-      )}
-				<Outlet />
-			</div>
+		<div>
+			<Navbar className='relative z-20' />
+			{children}
 			<ToastContainer />
-		</>
+		</div>
 	)
+}
+
+// Dashboard navbar and sidebar
+const WithDashboardNavbar = ({ children }) => {
+	return (
+		<div className='flex'>
+			<DashboardSidebar />
+			<DashboardNavbar />
+			{children}
+			<ToastContainer />
+		</div>
+	)
+}
+
+export const Root = () => {
+	return <Outlet />
+}
+
+WithLandingPageNavbar.propTypes = {
+  children: PropTypes.any
+}
+
+WithDashboardNavbar.propTypes = {
+  children: PropTypes.any
 }
 
 export default App
