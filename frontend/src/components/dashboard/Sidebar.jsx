@@ -67,7 +67,7 @@ export const DashboardSidebar = () => {
 	return (
 		<>
 			{/* Sidebar for larger screens */}
-			<div className='sticky top-0 w-max flex text-black bg-violet-shade border my-2 mx-4'>
+			<div className='w-max flex rounded-lg border my-2 mx-4'>
 				<div className='relative flex flex-col justify-between w-max h-[96vh] sm:hidden md:hidden'>
 					<div>
 						<Link
@@ -89,7 +89,7 @@ export const DashboardSidebar = () => {
 										to={`/${Item.link}`}
 										className={`${
 											pathMatchRoute(`/${Item.link}`) && 'text-white bg-grey'
-										} flex items-center mb-1 py-2 px-4 w-full text-grey hover:bg-grey hover:text-white`}
+										} flex items-center mb-1 py-2 px-4 w-full rounded-md text-grey hover:bg-grey hover:text-white`}
 									>
 										<span className='mr-2'>{Item.icon}</span>
 										{Item.title}
@@ -110,7 +110,7 @@ export const DashboardSidebar = () => {
 										to={`/${Item.title}`}
 										className={`${
 											pathMatchRoute(`/${Item.title}`) && 'text-white bg-grey'
-										} flex items-center mb-1 py-2 px-4 w-full text-grey hover:bg-grey hover:text-white`}
+										} flex items-center mb-1 py-2 px-4 w-full rounded-md text-grey hover:bg-grey hover:text-white`}
 									>
 										<span className='mr-2'>{Item.icon}</span>
 										{Item.title}
