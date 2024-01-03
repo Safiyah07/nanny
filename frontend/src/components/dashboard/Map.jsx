@@ -21,8 +21,8 @@ function Map() {
 
 	return (
 		<>
-			<div className='flex justify-between mx-5 relative w-full mb-12 mt-16'>
-				<section className='w-[50vw]'>
+			<div className='flex gap-5 justify-between mx-5 relative w-full mb-12 mt-16 h-[80vh]'>
+				<section className='w-[45vw]'>
 					<MapContainer
 						center={[48.8566, 2.3522]}
 						zoom={13}
@@ -41,7 +41,7 @@ function Map() {
 					</MapContainer>
 				</section>
 
-				<section className='flex flex-col gap-5 w-[25vw] h-auto'>
+				<section className='flex flex-col gap-5 w-[29.8vw] h-auto'>
 					{services.map((item) => (
 						<div
 							key={item.id}
