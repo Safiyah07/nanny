@@ -4,12 +4,12 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 function Map() {
 	return (
 		<>
-			<div className='h-screen w-[50vw]'>
+			<div className='relative w-[50vw] mb-12 mt-16'>
 				<MapContainer
 					center={[48.8566, 2.3522]}
 					zoom={13}
 					scrollWheelZoom={false}
-					className='h-screen'
+					className='h-[80vh]'
 				>
 					<TileLayer
 						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

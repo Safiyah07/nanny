@@ -6,12 +6,11 @@ export default function Index() {
 	return (
 		<>
 			<div className='flex'>
-				<Sidebar />
-				<div>
-					<Navbar />
-					<div className='relative top-0'>
-						<Dashboard />
-					</div>
+			<Sidebar />
+			<Navbar />
+			<Dashboard />
+				<div className=''>
+					<div className=''></div>
 				</div>
 			</div>
 		</>

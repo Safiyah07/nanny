@@ -67,8 +67,8 @@ export const DashboardSidebar = () => {
 	return (
 		<>
 			{/* Sidebar for larger screens */}
-			<div className='w-fit h-screen flex text-black bg-violet-shade shadow-[1px_1px_3px_0px_grey] overflow-y-auto z-10'>
-				<div className='relative flex flex-col justify-between w-fit h-full sm:hidden md:hidden'>
+			<div className='sticky top-0 w-max flex text-black bg-violet-shade border my-2 mx-4'>
+				<div className='relative flex flex-col justify-between w-max h-[96vh] sm:hidden md:hidden'>
 					<div>
 						<Link
 							to='/dashboard'
