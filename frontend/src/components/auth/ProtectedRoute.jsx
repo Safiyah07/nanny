@@ -1,20 +1,16 @@
-import { useEffect } from 'react'
+
 import { Navigate, Outlet } from 'react-router-dom'
 
-const useAuth = () => {
-	const user = { loggedIn: false }
-	return user && user.loggedIn
-}
+// const useAuth = () => {
+// 	const user = { loggedIn: false }
+// 	return user && user.loggedIn
+// }
 
 function ProtectedRoute() {
-  useEffect(() => {
-    console.log('Hey')
-  }, [])
+  // const isAuth = useAuth()
+  let auth = {'token': false}
 
-
-  const isAuth = useAuth()
-
-	return isAuth ? <Outlet /> : <Navigate to='/' />
+	return auth.token ? <Outlet /> : <Navigate to='/login' />
 }
 
 export default ProtectedRoute

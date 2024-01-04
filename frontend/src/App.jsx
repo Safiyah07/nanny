@@ -28,33 +28,33 @@ function App() {
 				<Route
 					index
 					element={
-						<WithLandingPageNavbar>
+						<LandingPageLayout>
 							<Landing />
-						</WithLandingPageNavbar>
+						</LandingPageLayout>
 					}
 				/>
 				<Route
 					path='/login'
 					element={
-						<WithLandingPageNavbar>
+						<LandingPageLayout>
 							<Login />
-						</WithLandingPageNavbar>
+						</LandingPageLayout>
 					}
 				/>
 				<Route
 					path='/register'
 					element={
-						<WithLandingPageNavbar>
+						<LandingPageLayout>
 							<Register />
-						</WithLandingPageNavbar>
+						</LandingPageLayout>
 					}
 				/>
 				<Route
 					path='/dashboard'
 					element={
-						<WithDashboardNavbar>
+						<DashboardLayout>
 							<DashboardIndex />
-						</WithDashboardNavbar>
+						</DashboardLayout>
 					}
 				/>
 				<Route
@@ -73,7 +73,7 @@ function App() {
 }
 
 // Landing page navbar
-const WithLandingPageNavbar = ({ children }) => {
+const LandingPageLayout = ({ children }) => {
 	return (
 		<div>
 			<Navbar className='relative z-20' />
@@ -84,7 +84,7 @@ const WithLandingPageNavbar = ({ children }) => {
 }
 
 // Dashboard navbar and sidebar
-const WithDashboardNavbar = ({ children }) => {
+const DashboardLayout = ({ children }) => {
 	return (
 		<div className='flex'>
 			<DashboardSidebar />
@@ -99,12 +99,12 @@ export const Root = () => {
 	return <Outlet />
 }
 
-WithLandingPageNavbar.propTypes = {
-  children: PropTypes.any
+LandingPageLayout.propTypes = {
+	children: PropTypes.any,
 }
 
-WithDashboardNavbar.propTypes = {
-  children: PropTypes.any
+DashboardLayout.propTypes = {
+	children: PropTypes.any,
 }
 
 export default App
