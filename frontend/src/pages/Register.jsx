@@ -1,15 +1,10 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify'
 import { FaUser } from 'react-icons/fa'
+import AuthContext from '../context/AuthContext';
 
 export default function Register() {
-	const [formData, setFormData] = useState({
-		name: '',
-		email: '',
-		password: '',
-		password2: '',
-	})
+	const {formData, setFormData, registerUser} = useContext(AuthContext)
 
 	const { name, email, password, password2 } = formData
 
@@ -25,27 +20,14 @@ export default function Register() {
 	const onSubmit = async (e) => {
 		e.preventDefault()
 
-		const registerURL = 'http://localhost:3010/api/users'
-
 		try {
-			const response = await fetch(`${registerURL}`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ name, email, password, password2 }),
-			})
-			const data = await response.json()
-
-			if(response.ok) {
-				toast.success('Registration Successful')
-				navigate('/dashboard')
-			} else {
-				toast.error(data.message)
-			}
+			
+			await registerUser()
+			navigate('/dashboard')
 		} catch (error) {
-			toast.error('Error submitting form:', error)
+			console.log(error)
 		}
+
 	}
 
 	return (

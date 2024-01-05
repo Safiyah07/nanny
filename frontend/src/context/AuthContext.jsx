@@ -1,33 +1,74 @@
-// AuthContext.js
-import React, { createContext, useContext, useState } from 'react';
+import PropTypes from 'prop-types'
+import { useState, createContext } from 'react'
+import { toast } from 'react-toastify'
 
-const AuthContext = createContext();
+const AuthContext = createContext()
+
+const backendURL = import.meta.env.VITE_BACKEND_URL
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+	const [formData, setFormData] = useState({
+		name: '',
+		email: '',
+		password: '',
+		password2: '',
+	})
 
-  const registerUser = async (formData) => {
-    // Implement your registration logic here
-    // Update the user state if registration is successful
-  };
+	const registerUser = async () => {
+		const { name, email, password, password2 } = formData
 
-  const loginUser = async (formData) => {
-    // Implement your login logic here
-    // Update the user state if login is successful
-  };
+		const response = await fetch(`${backendURL}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ name, email, password, password2 }),
+		})
+		const data = await response.json()
 
-  const logoutUser = () => {
-    // Implement your logout logic here
-    // Remove the user state
-  };
+		if (response.ok) {
+			toast.success('Registration Successful')
+		}
 
-  return (
-    <AuthContext.Provider value={{ user, registerUser, loginUser, logoutUser }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+		toast.error(data.message)
+	}
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+	const loginUser = async () => {
+		const { email, password } = formData
+
+		const response = await fetch(`${backendURL}/login`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ email, password }),
+		})
+
+		const data = await response.json()
+		console.log(data)
+
+		if (response.ok) {
+			toast.success('Login Successful')
+		} else {
+			toast.error(data.message)
+		}
+	}
+
+	// const logoutUser = () => {}
+
+	// const protectedRoute = () => {}
+
+	return (
+		<AuthContext.Provider
+			value={{ formData, setFormData, registerUser, loginUser }}
+		>
+			{children}
+		</AuthContext.Provider>
+	)
+}
+
+AuthProvider.propTypes = {
+	children: PropTypes.any,
+}
+
+export default AuthContext

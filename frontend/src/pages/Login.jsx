@@ -1,15 +1,13 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import { FaSignInAlt } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import AuthContext from '../context/AuthContext'
 
 export default function Login() {
-	const [formData, setFormData] = useState({
-		email: '',
-		password: '',
-	})
+	const {formData, setFormData, loginUser} = useContext(AuthContext)
 
-	const { email, password } = formData
+	const {email, password} = formData
 
 	const navigate = useNavigate()
 
@@ -22,30 +20,18 @@ export default function Login() {
 
 	const onSubmit = async (e) => {
 		e.preventDefault()
-		const loginURL = 'http://localhost:3010/api/users'
 
 		try {
-			const response = await fetch(`${loginURL}/login`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ email, password }),
-			})
-
-			const data = await response.json()
-			console.log(data)
-
-			if(response.ok) {
-				toast.success('Login Successful')
+			if(email && password) {
+				await loginUser()
 				navigate('/dashboard')
-			} else {
-				toast.error(data.message)
 			}
-			navigate('/dashboard')
+			
 		} catch (error) {
-			toast.error('Error submitting form:', error)
+			console.log(error)
+			toast.error(error)
 		}
+
 	}
 
 	return (

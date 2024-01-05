@@ -7,8 +7,9 @@ import {
 	Outlet,
 	RouterProvider,
 } from 'react-router-dom'
-import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { AuthProvider } from './context/AuthContext'
 import Navbar from './components/Navbar'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
@@ -67,7 +68,9 @@ function App() {
 
 	return (
 		<>
-			<RouterProvider router={router} />
+			<AuthProvider>
+				<RouterProvider router={router} />
+			</AuthProvider>
 		</>
 	)
 }
