@@ -1,23 +1,23 @@
-import './index.css'
-import PropTypes from 'prop-types'
+import './index.css';
+import PropTypes from 'prop-types';
 import {
 	createBrowserRouter,
 	createRoutesFromElements,
 	Route,
 	Outlet,
 	RouterProvider,
-} from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { AuthProvider } from './context/AuthContext'
-import Navbar from './components/Navbar'
-import Landing from './pages/Landing'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import DashboardIndex from './pages/dashboard'
-import DashboardSidebar from './components/dashboard/Sidebar'
-import DashboardNavbar from './components/dashboard/Navbar'
-import NotFound from './pages/NotFound'
+} from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthProvider } from './context/AuthContext';
+import Navbar from './components/Navbar';
+import Landing from './pages/Landing';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import DashboardIndex from './pages/dashboard';
+import DashboardSidebar from './components/dashboard/Sidebar';
+import DashboardNavbar from './components/dashboard/Navbar';
+import NotFound from './pages/NotFound';
 
 function App() {
 	const router = createBrowserRouter(
@@ -64,7 +64,7 @@ function App() {
 				/>
 			</Route>
 		)
-	)
+	);
 
 	return (
 		<>
@@ -72,7 +72,7 @@ function App() {
 				<RouterProvider router={router} />
 			</AuthProvider>
 		</>
-	)
+	);
 }
 
 // Landing page navbar
@@ -83,8 +83,8 @@ const LandingPageLayout = ({ children }) => {
 			{children}
 			<ToastContainer />
 		</div>
-	)
-}
+	);
+};
 
 // Dashboard navbar and sidebar
 const DashboardLayout = ({ children }) => {
@@ -95,19 +95,19 @@ const DashboardLayout = ({ children }) => {
 			{children}
 			<ToastContainer />
 		</div>
-	)
-}
+	);
+};
 
 export const Root = () => {
-	return <Outlet />
-}
+	return <Outlet />;
+};
 
 LandingPageLayout.propTypes = {
 	children: PropTypes.any,
-}
+};
 
 DashboardLayout.propTypes = {
 	children: PropTypes.any,
-}
+};
 
-export default App
+export default App;

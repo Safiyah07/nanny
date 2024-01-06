@@ -1,42 +1,43 @@
-import { useContext } from 'react'
-import { FaSignInAlt } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import AuthContext from '../context/AuthContext'
+import { useContext } from 'react';
+import { FaSignInAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import AuthContext from '../context/AuthContext';
 
 export default function Login() {
-	const {formData, setFormData, loginUser} = useContext(AuthContext)
+	const { formData, setFormData, loginUser, loginData } = useContext(AuthContext);
 
-	const {email, password} = formData
+	const { email, password } = formData;
 
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const onChange = (e) => {
 		setFormData((prevState) => ({
 			...prevState,
 			[e.target.name]: e.target.value,
-		}))
-	}
+		}));
+	};
 
 	const onSubmit = async (e) => {
-		e.preventDefault()
+		e.preventDefault();
 
 		try {
-			if(email && password) {
-				await loginUser()
-				navigate('/dashboard')
+			if (!email || !password) {
+				toast.error('Invalid Credentials');
+			} else {
+				await loginUser();
+				console.log(loginData)
+				navigate('/dashboard');
 			}
-			
 		} catch (error) {
-			console.log(error)
-			toast.error(error)
+			console.log(error);
+			toast.error('Invalid Credentials');
 		}
-
-	}
+	};
 
 	return (
 		<>
-		<div className='bg-about-image bg-no-repeat bg-top blur-sm bg-cover lg:h-[99vh] md:h-[98vh] sm:h-[95vh] w-full'></div>
+			<div className='bg-about-image bg-no-repeat bg-top blur-sm bg-cover lg:h-[99vh] md:h-[98vh] sm:h-[95vh] w-full'></div>
 			<div className='flex flex-col justify-center items-center absolute top-0 w-full h-screen'>
 				<div className='px-12 py-20 glass-effect lg:w-[60%] w-[85%] m-auto'>
 					<section className='flex flex-col items-center pb-8'>
@@ -84,5 +85,5 @@ export default function Login() {
 				</div>
 			</div>
 		</>
-	)
+	);
 }

@@ -1,34 +1,28 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaUser } from 'react-icons/fa'
+import { FaUser } from 'react-icons/fa';
 import AuthContext from '../context/AuthContext';
 
 export default function Register() {
-	const {formData, setFormData, registerUser} = useContext(AuthContext)
+	const { formData, setFormData, registerUser } = useContext(AuthContext);
 
-	const { name, email, password, password2 } = formData
+	const { name, email, password, password2 } = formData;
 
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const onChange = (e) => {
 		setFormData((prevState) => ({
 			...prevState,
 			[e.target.name]: e.target.value,
-		}))
-	}
+		}));
+	};
 
 	const onSubmit = async (e) => {
-		e.preventDefault()
+		e.preventDefault();
 
-		try {
-			
-			await registerUser()
-			navigate('/dashboard')
-		} catch (error) {
-			console.log(error)
-		}
-
-	}
+		await registerUser();
+		navigate('/dashboard');
+	};
 
 	return (
 		<>
@@ -102,5 +96,5 @@ export default function Register() {
 				</div>
 			</div>
 		</>
-	)
+	);
 }
