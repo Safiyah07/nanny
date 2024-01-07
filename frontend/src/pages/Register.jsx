@@ -4,7 +4,8 @@ import { FaUser } from 'react-icons/fa';
 import AuthContext from '../context/AuthContext';
 
 export default function Register() {
-	const { formData, setFormData, registerUser } = useContext(AuthContext);
+	const { formData, setFormData, registerUser } =
+		useContext(AuthContext);
 
 	const { name, email, password, password2 } = formData;
 
@@ -20,8 +21,13 @@ export default function Register() {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
-		await registerUser();
-		navigate('/dashboard');
+		const registrationSuccessful = await registerUser();
+
+		if(registrationSuccessful) {
+			navigate('/dashboard')
+		} else {
+			return
+		}
 	};
 
 	return (

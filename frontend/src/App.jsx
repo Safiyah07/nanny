@@ -98,6 +98,7 @@ const DashboardLayout = ({ children }) => {
 	);
 };
 
+
 export const Root = () => {
 	return <Outlet />;
 };

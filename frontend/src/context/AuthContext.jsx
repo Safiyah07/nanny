@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect, createContext } from 'react';
-import { toast } from 'react-toastify';
+import { useState, createContext } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 const AuthContext = createContext();
 
@@ -14,14 +14,7 @@ export const AuthProvider = ({ children }) => {
 		password2: '',
 	});
 
-	const [loginData, setLoginData] = useState({
-		name: '',
-		email: '',
-		token: '',
-	});
-
-	let registerResult
-	let loginResult
+	const [loginData, setLoginData] = useState();
 
 	const [registerData, setRegisterData] = useState();
 
@@ -38,10 +31,16 @@ export const AuthProvider = ({ children }) => {
 			});
 			const data = await response.json();
 			setRegisterData(data);
-			registerResult = data
 
-			if (response.ok) {
+			if (data.message) {
+				toast.error(data.message);
+				return false;
+			} else if (response.ok) {
+				localStorage.setItem('registered_user', JSON.stringify(data));
 				toast.success('Registration Successful');
+				return true;
+			} else {
+				return false;
 			}
 		} catch (error) {
 			toast.error(error.message);
@@ -61,13 +60,16 @@ export const AuthProvider = ({ children }) => {
 			});
 
 			const data = await response.json();
-			loginResult = data
 
-			if (!response.ok) {
+			if (data.message) {
 				toast.error(data.message);
-			} else {
-				setLoginData(data);
+				return false;
+			} else if (response.ok) {
+				localStorage.setItem('loggedIn_user', JSON.stringify(data));
 				toast.success('Login Successful');
+				return true;
+			} else {
+				return false;
 			}
 		} catch (error) {
 			toast.error(error.message);
@@ -78,14 +80,10 @@ export const AuthProvider = ({ children }) => {
 
 	// const protectedRoute = () => {}
 
-	useEffect(() => {
-		registerUser();
-		loginUser();
-	}, []);
-
 	return (
 		<AuthContext.Provider
 			value={{
+				toast,
 				loginData,
 				registerData,
 				formData,
@@ -97,6 +95,7 @@ export const AuthProvider = ({ children }) => {
 			}}
 		>
 			{children}
+			<ToastContainer />
 		</AuthContext.Provider>
 	);
 };

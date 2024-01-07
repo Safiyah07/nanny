@@ -1,11 +1,10 @@
 import { useContext } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import AuthContext from '../context/AuthContext';
 
 export default function Login() {
-	const { formData, setFormData, loginUser, loginData } = useContext(AuthContext);
+	const { formData, setFormData, loginUser } = useContext(AuthContext);
 
 	const { email, password } = formData;
 
@@ -21,26 +20,16 @@ export default function Login() {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
-		try {
-			await loginUser();
-			// if (email && password) {
-			// 	navigate('/dashboard');
-			// } else {
-			// 	toast.error('Invalid Credentials');
-			// 	console.log(loginData)
-			// }
+		const loginSuccessful = await loginUser();
 
-			if(!loginData.token) {
-				toast.error('Invalid Credentials');
-			} else {
-				navigate('/dashboard')
-			}
+		const storedLoginUser = localStorage.getItem('loggedIn_user');
+		const storedRegUser = localStorage.getItem('registered_user');
 
-			console.log(loginData.token)
+		const login = JSON.parse(storedLoginUser);
+		const reg = JSON.parse(storedRegUser);
 
-		} catch (error) {
-			console.log(error);
-			toast.error('Invalid Credentials');
+		if (loginSuccessful && login.email === reg.email && login.password === reg.password) {
+			navigate('/dashboard');
 		}
 	};
 
