@@ -22,13 +22,22 @@ export default function Login() {
 		e.preventDefault();
 
 		try {
-			if (!email || !password) {
+			await loginUser();
+			// if (email && password) {
+			// 	navigate('/dashboard');
+			// } else {
+			// 	toast.error('Invalid Credentials');
+			// 	console.log(loginData)
+			// }
+
+			if(!loginData.token) {
 				toast.error('Invalid Credentials');
 			} else {
-				await loginUser();
-				console.log(loginData)
-				navigate('/dashboard');
+				navigate('/dashboard')
 			}
+
+			console.log(loginData.token)
+
 		} catch (error) {
 			console.log(error);
 			toast.error('Invalid Credentials');

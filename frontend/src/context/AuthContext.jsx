@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, createContext } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { toast } from 'react-toastify';
 
 const AuthContext = createContext();
@@ -14,7 +14,15 @@ export const AuthProvider = ({ children }) => {
 		password2: '',
 	});
 
-	const [loginData, setLoginData] = useState();
+	const [loginData, setLoginData] = useState({
+		name: '',
+		email: '',
+		token: '',
+	});
+
+	let registerResult
+	let loginResult
+
 	const [registerData, setRegisterData] = useState();
 
 	const registerUser = async () => {
@@ -30,6 +38,7 @@ export const AuthProvider = ({ children }) => {
 			});
 			const data = await response.json();
 			setRegisterData(data);
+			registerResult = data
 
 			if (response.ok) {
 				toast.success('Registration Successful');
@@ -52,11 +61,10 @@ export const AuthProvider = ({ children }) => {
 			});
 
 			const data = await response.json();
-			console.log(data);
+			loginResult = data
 
 			if (!response.ok) {
-				console.log(data.message);
-				throw new Error(data.message);
+				toast.error(data.message);
 			} else {
 				setLoginData(data);
 				toast.success('Login Successful');
@@ -69,6 +77,11 @@ export const AuthProvider = ({ children }) => {
 	// const logoutUser = () => {}
 
 	// const protectedRoute = () => {}
+
+	useEffect(() => {
+		registerUser();
+		loginUser();
+	}, []);
 
 	return (
 		<AuthContext.Provider
