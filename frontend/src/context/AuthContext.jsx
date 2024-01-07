@@ -32,6 +32,11 @@ export const AuthProvider = ({ children }) => {
 			const data = await response.json();
 			setRegisterData(data);
 
+			if(password != password2) {
+				toast.error('Passwords must match')
+				return false
+			}
+
 			if (data.message) {
 				toast.error(data.message);
 				return false;
