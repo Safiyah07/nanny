@@ -22,14 +22,11 @@ export default function Login() {
 
 		const loginSuccessful = await loginUser();
 
-		const storedLoginUser = localStorage.getItem('loggedIn_user');
-		const storedRegUser = localStorage.getItem('registered_user');
-
-		const login = JSON.parse(storedLoginUser);
-		const reg = JSON.parse(storedRegUser);
-
-		if (loginSuccessful && login.email === reg.email && login.password === reg.password) {
-			navigate('/dashboard');
+		if (loginSuccessful) {
+			navigate('/dashboard')
+			console.log(123)
+		} else {
+			return
 		}
 	};
 
