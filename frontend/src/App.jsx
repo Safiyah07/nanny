@@ -11,12 +11,13 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
+import DashboardSidebar from './components/dashboard/Sidebar';
+import DashboardNavbar from './components/dashboard/Navbar';
+import DashboardIndex from './pages/dashboard';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import DashboardIndex from './pages/dashboard';
-import DashboardSidebar from './components/dashboard/Sidebar';
-import DashboardNavbar from './components/dashboard/Navbar';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -50,14 +51,16 @@ function App() {
 						</LandingPageLayout>
 					}
 				/>
-				<Route
-					path='/dashboard'
-					element={
-						<DashboardLayout>
-							<DashboardIndex />
-						</DashboardLayout>
-					}
-				/>
+				<Route element={<ProtectedRoute />}>
+					<Route
+						path='/dashboard'
+						element={
+							<DashboardLayout>
+								<DashboardIndex />
+							</DashboardLayout>
+						}
+					/>
+				</Route>
 				<Route
 					path='/*'
 					element={<NotFound />}
@@ -97,7 +100,6 @@ const DashboardLayout = ({ children }) => {
 		</div>
 	);
 };
-
 
 export const Root = () => {
 	return <Outlet />;

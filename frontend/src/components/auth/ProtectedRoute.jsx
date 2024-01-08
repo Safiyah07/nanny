@@ -1,38 +1,44 @@
 import { useState, useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 function ProtectedRoute() {
-	const [auth, authData] = useState({
-		user: '',
-		name: '',
-		email: '',
-	});
+	const backendURL = import.meta.env.VITE_BACKEND_URL;
 
-	const { user } = auth;
+	const getToken = localStorage.getItem('loggedIn_user');
+
+  console.log(getToken)
+
+	const tokenToString = JSON.parse(getToken);
+  console.log(tokenToString)
+
+	const token = tokenToString.token;
+
+	const [auth, setAuth] = useState({
+		email: '',
+		id: '',
+		name: '',
+		token: `${token}`,
+	});
 
 	useEffect(() => {
 		const getAuthUser = async () => {
-			const getToken = localStorage.getItem('loggedIn_user');
-			const tokenToString = JSON.parse(getToken);
-
-			console.log(tokenToString.token);
-			const token = tokenToString.token;
-
 			try {
-				const response = await fetch('http://localhost:3010/api/users/me', {
+				const response = await fetch(`${backendURL}/me`, {
 					method: 'GET',
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
-					body: JSON.stringify({ user }),
 				});
 
 				const data = await response.json();
 				console.log(data);
 
-				if (!response.ok) {
-					toast.info("You're Authorised to access this page");
+				if (response.ok) {
+					setAuth((prevState) => {
+						console.log(prevState);
+						// console.log(data);
+						return data; // Update the state with the new data
+					});
 				}
 			} catch (error) {
 				console.log(error);
@@ -40,7 +46,13 @@ function ProtectedRoute() {
 		};
 
 		getAuthUser();
-	}, []);
+	}, [backendURL, token]);
+
+	// useEffect(() => {
+	// 	// Log the updated auth state
+	// 	console.log(auth);
+	// 	console.log(auth.token);
+	// }, [auth]);
 
 	return auth.token ? <Outlet /> : <Navigate to='/login' />;
 }
