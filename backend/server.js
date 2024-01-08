@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
-	res.status(200).send({ message: 'Home page' })
+	res.status(200).send({ message: 'Welcome to my backend server' })
 })
 // Route to add data
 app.use('/api/users', require('./routes/userRoutes'))

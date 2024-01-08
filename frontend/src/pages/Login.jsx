@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
+import AuthContext from '../context/authContext';
 
 export default function Login() {
-	const { formData, setFormData, loginUser } = useContext(AuthContext);
+	const { formData, setFormData, loginUser } =
+		useContext(AuthContext);
 
 	const { email, password } = formData;
 
@@ -23,10 +24,9 @@ export default function Login() {
 		const loginSuccessful = await loginUser();
 
 		if (loginSuccessful) {
-			navigate('/dashboard')
-			console.log(123)
+			navigate('/dashboard');
 		} else {
-			return
+			return;
 		}
 	};
 

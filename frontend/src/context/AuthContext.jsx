@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, createContext } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
 const AuthContext = createContext();
@@ -14,9 +14,13 @@ export const AuthProvider = ({ children }) => {
 		password2: '',
 	});
 
-	const [loginData, setLoginData] = useState();
-
-	const [registerData, setRegisterData] = useState();
+	const [loginData, setLoginData] = useState({
+		email: '',
+		name: '',
+		password: '',
+		token: '',
+		id: '',
+	});
 
 	const registerUser = async () => {
 		const { name, email, password, password2 } = formData;
@@ -30,11 +34,10 @@ export const AuthProvider = ({ children }) => {
 				body: JSON.stringify({ name, email, password, password2 }),
 			});
 			const data = await response.json();
-			setRegisterData(data);
 
-			if(password != password2) {
-				toast.error('Passwords must match')
-				return false
+			if (password != password2) {
+				toast.error('Passwords must match');
+				return false;
 			}
 
 			if (data.message) {
@@ -72,6 +75,7 @@ export const AuthProvider = ({ children }) => {
 			} else if (response.ok) {
 				localStorage.setItem('loggedIn_user', JSON.stringify(data));
 				toast.success('Login Successful');
+				setLoginData(data);
 				return true;
 			} else {
 				return false;
@@ -85,18 +89,20 @@ export const AuthProvider = ({ children }) => {
 
 	// const protectedRoute = () => {}
 
+	useEffect(() => {
+		loginUser, registerUser;
+	}, []);
+
 	return (
 		<AuthContext.Provider
 			value={{
 				toast,
 				loginData,
-				registerData,
 				formData,
 				setFormData,
 				registerUser,
 				loginUser,
 				setLoginData,
-				setRegisterData,
 			}}
 		>
 			{children}
