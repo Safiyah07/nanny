@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../context/authContext';
+import AuthContext from '../context/AuthContext';
 
 export default function Login() {
 	const { formData, setFormData, loginUser } =

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useState, useEffect, createContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -26,14 +27,14 @@ export const AuthProvider = ({ children }) => {
 		const { name, email, password, password2 } = formData;
 
 		try {
-			const response = await fetch(`${backendURL}`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ name, email, password, password2 }),
+			const response = await axios.post(`${backendURL}`, {
+				name,
+				email,
+				password,
+				password2,
 			});
-			const data = await response.json();
+
+			const data = response.data;
 
 			if (password != password2) {
 				toast.error('Passwords must match');
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 			if (data.message) {
 				toast.error(data.message);
 				return false;
-			} else if (response.ok) {
+			} else if (response.status === 201) {
 				localStorage.setItem('registered_user', JSON.stringify(data));
 				toast.success('Registration Successful');
 				return true;
@@ -51,7 +52,7 @@ export const AuthProvider = ({ children }) => {
 				return false;
 			}
 		} catch (error) {
-			toast.error(error.message);
+			toast.error(error.message || 'An error occurred during registration');
 		}
 	};
 
@@ -59,20 +60,17 @@ export const AuthProvider = ({ children }) => {
 		const { email, password } = formData;
 
 		try {
-			const response = await fetch(`${backendURL}/login`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ email, password }),
-			});
+			const response = await axios.post(`${backendURL}/login`, {
+				email,
+				password,
+			})
 
-			const data = await response.json();
+			const data = response.data;
 
 			if (data.message) {
 				toast.error(data.message);
 				return false;
-			} else if (response.ok) {
+			} else if (response.status === 200) {
 				localStorage.setItem('loggedIn_user', JSON.stringify(data));
 				toast.success('Login Successful');
 				setLoginData(data);

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
@@ -17,23 +18,21 @@ function ProtectedRoute() {
 		email: '',
 		id: '',
 		name: '',
-		token: `${token}`,
+		// token: `${token}`,
 	});
 
 	useEffect(() => {
 		const getAuthUser = async () => {
 			try {
-				const response = await fetch(`${backendURL}/me`, {
-					method: 'GET',
+				const response = await axios.get(`${backendURL}/me`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
-				});
+				})
 
-				const data = await response.json();
-				console.log(data);
+				const data = response.data
 
-				if (response.ok) {
+				if (response.status === 200) {
 					setAuth((prevState) => {
 						console.log(prevState);
 						// console.log(data);
@@ -48,11 +47,11 @@ function ProtectedRoute() {
 		getAuthUser();
 	}, [backendURL, token]);
 
-	// useEffect(() => {
-	// 	// Log the updated auth state
-	// 	console.log(auth);
-	// 	console.log(auth.token);
-	// }, [auth]);
+	useEffect(() => {
+		// Log the updated auth state
+		console.log(auth);
+		console.log(auth.token);
+	}, [auth]);
 
 	return auth.token ? <Outlet /> : <Navigate to='/login' />;
 }
